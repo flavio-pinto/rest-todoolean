@@ -64,6 +64,10 @@ body {
     transition: border 200ms;
 }
 
+.todo__list__element:last-child {
+    border-bottom: none;
+}
+
 .todo__list__element__remove {
     cursor: pointer;
 }

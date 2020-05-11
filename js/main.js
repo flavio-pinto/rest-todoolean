@@ -27,6 +27,13 @@ $(document).ready(function () {
         createNewTodo(apiUrl, todoInput, template, todoList);
     });
 
+    todoInput.keyup(function(event){
+        var todoInputValue = todoInput.val().trim();
+        if(event.which == 13) {
+            createNewTodo(apiUrl, todoInput, template, todoList);
+        }
+    });
+
     //Rimozione elemento
     todoList.on('click', '.todo__list__element__remove', function() {
         deleteToDo($(this), apiUrl, template, todoList);
@@ -60,7 +67,6 @@ function createNewTodo(apiUrl, input, template, todoList) {
     } else {
         alert('Non puoi inserire un campo vuoto!')
     }
-    
 }
 
 //Funzione per eliminare elemento todo
