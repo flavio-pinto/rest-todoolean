@@ -28,7 +28,6 @@ $(document).ready(function () {
     });
 
     todoInput.keyup(function(event){
-        var todoInputValue = todoInput.val().trim();
         if(event.which == 13) {
             createNewTodo(apiUrl, todoInput, template, todoList);
         }
