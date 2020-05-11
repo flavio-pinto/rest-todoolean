@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
     <title>Todoolean</title>
 </head>
@@ -26,8 +28,8 @@
     <!-- TEMPLATES HANDLEBARS -->
     <script id="template__todo" type="text/x-handlebars-template">
         <li class="todo__list__element">
-            <span class="todo__list__element__text">{{todoText}}</span>
-            <span class="todo__list__element__remove" data-id="{{id}}">X</span>
+            <span class="todo__list__element__text">- {{todoText}}</span>
+            <span class="todo__list__element__remove" data-id="{{id}}"><i class="far fa-trash-alt"></i></span>
         </li>
     </script>
 
