@@ -7,6 +7,31 @@
     <title>Todoolean</title>
 </head>
 <body>
+    <!-- ToDo List -->
+    <div id="app">
+        <header class="main__header">
+            <h1 class="main__header__title"></h1>
+        </header>
+
+        <main class="todo">
+            <input class="todo__input" type="text">
+            <button class="todo__button">Inserisci</button>
+
+            <ul class="todo__list">
+                
+            </ul>
+        </main>
+    </div>
+
+    <!-- TEMPLATES HANDLEBARS -->
+    <script id="template__todo" type="text/x-handlebars-template">
+        <li class="todo__list__element">
+            <span class="todo__list__element__text">{{todoText}}</span>
+            <span class="todo__list__element__remove" data-id="{{id}}">X</span>
+        </li>
+    </script>
+
+    <!-- JAVASCRIPT -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js'></script>
     <script src="js/main.js"></script>
