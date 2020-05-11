@@ -47,15 +47,20 @@ function createNewTodo(apiUrl, input, template, todoList) {
             text: todoInputValue
         }
     };
-    $.ajax(settings)
-    .done(function(){
-        printApiTodos(apiUrl, template, todoList);
-    })
-    .fail(function(){
-        console.error('Si è verificato un errore nella creazione del nuovo elemento todo');
-    });
-    //Reset input
-    input.val('');
+    if (todoInputValue.length > 0) {
+        $.ajax(settings)
+        .done(function(){
+            printApiTodos(apiUrl, template, todoList);
+        })
+        .fail(function(){
+            console.error('Si è verificato un errore nella creazione del nuovo elemento todo');
+        });
+        //Reset e focus input
+        input.val('').focus();
+    } else {
+        alert('Non puoi inserire un campo vuoto!')
+    }
+    
 }
 
 //Funzione per eliminare elemento todo
