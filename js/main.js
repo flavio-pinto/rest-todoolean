@@ -24,43 +24,55 @@ $(document).ready(function () {
 
     //Rendo funzionante pulsante invio nuovo elemento todo
     todoButton.click(function(){
-        var todoInputValue = todoInput.val().trim();
-        var settings = {
-            url: apiUrl,
-            method: 'POST',
-            data: {
-                text: todoInputValue
-            }
-        };
-        $.ajax(settings)
-        .done(function(){
-            printApiTodos(apiUrl, template, todoList);
-        })
-        .fail(function(){
-            console.error('Si è verificato un errore nella creazione del nuovo elemento todo');
-        })
+        createNewTodo(apiUrl, todoInput, template, todoList);
     });
 
     //Rimozione elemento
     todoList.on('click', '.todo__list__element__remove', function() {
-        var todoId = $(this).data('id');
-        var settings = {
-            url: apiUrl + '/' + todoId,
-            method: 'DELETE',
-        };
-        $.ajax(settings)
-        .done(function(){
-            printApiTodos(apiUrl, template, todoList);
-        })
-        .fail(function(){
-            console.error('Si è verificato un errore durante l\'eliminazione dell\'elemento');
-        })
+        deleteToDo($(this), apiUrl, template, todoList);
     });
 }); //<---- end doc ready
 
 /********************
  ******FUNZIONI******
  ********************/
+
+//Funzione per creare nuovo elemento todo
+function createNewTodo(apiUrl, input, template, todoList) {
+    var todoInputValue = input.val().trim();
+    var settings = {
+        url: apiUrl,
+        method: 'POST',
+        data: {
+            text: todoInputValue
+        }
+    };
+    $.ajax(settings)
+    .done(function(){
+        printApiTodos(apiUrl, template, todoList);
+    })
+    .fail(function(){
+        console.error('Si è verificato un errore nella creazione del nuovo elemento todo');
+    });
+    //Reset input
+    input.val('');
+}
+
+//Funzione per eliminare elemento todo
+function deleteToDo(self, apiUrl, template, todoList) {
+    var todoId = self.data('id');
+    var settings = {
+        url: apiUrl + '/' + todoId,
+        method: 'DELETE',
+    };
+    $.ajax(settings)
+    .done(function(){
+        printApiTodos(apiUrl, template, todoList);
+    })
+    .fail(function(){
+        console.error('Si è verificato un errore durante l\'eliminazione dell\'elemento');
+    })
+}
 
 //Funzione per stampare la lista todo presa dall'Api
 function printApiTodos(apiUrl, template, todoList) {
