@@ -21,6 +21,41 @@ $(document).ready(function () {
     
     //Richiamo funzione per ottenere la todo list dall'API
     printApiTodos(apiUrl, template, todoList);
+
+    //Rendo funzionante pulsante invio nuovo elemento todo
+    todoButton.click(function(){
+        var todoInputValue = todoInput.val().trim();
+        var settings = {
+            url: apiUrl,
+            method: 'POST',
+            data: {
+                text: todoInputValue
+            }
+        };
+        $.ajax(settings)
+        .done(function(){
+            printApiTodos(apiUrl, template, todoList);
+        })
+        .fail(function(){
+            console.error('Si è verificato un errore nella creazione del nuovo elemento todo');
+        })
+    });
+
+    //Rimozione elemento
+    todoList.on('click', '.todo__list__element__remove', function() {
+        var todoId = $(this).data('id');
+        var settings = {
+            url: apiUrl + '/' + todoId,
+            method: 'DELETE',
+        };
+        $.ajax(settings)
+        .done(function(){
+            printApiTodos(apiUrl, template, todoList);
+        })
+        .fail(function(){
+            console.error('Si è verificato un errore durante l\'eliminazione dell\'elemento');
+        })
+    });
 }); //<---- end doc ready
 
 /********************
@@ -29,13 +64,13 @@ $(document).ready(function () {
 
 //Funzione per stampare la lista todo presa dall'Api
 function printApiTodos(apiUrl, template, todoList) {
-    //Reset list
+    //Pulizia lista
     todoList.html('');
     
     var settings = {
         url: apiUrl,
         method: 'GET',
-    }
+    };
     $.ajax(settings)
     .done(function(res){
         var todoElementsApi = res;
